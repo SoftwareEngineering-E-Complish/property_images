@@ -16,7 +16,7 @@ public class UrlBuilder {
     public void setUrl(String url) {
         UrlBuilder.url = url;
     }
-    public static String buildUrl( String key) {
+    public static String buildUrl(String key) {
         return "https://" + bucketName + "." + url + "/" + key;
     }
 
