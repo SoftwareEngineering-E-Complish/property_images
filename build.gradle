@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
+    id "jacoco"
+    id "org.sonarqube" version "5.0.0.4638"
 }
 
 group = 'org.ecomplish'
@@ -9,6 +11,42 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+    /*sonar{
+        properties{
+            property "sonar.projectKey", "SoftwareEngineering-E-Complish_property_images"
+            property "sonar.organization", "softwareengineering-e-complish"
+            property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+        }
+    }*/
+}
+
+sonar {
+    properties {
+        // SonarQube server URL
+        property "sonar.host.url", "https://sonarcloud.io"
+        // SonarQube project key
+        property "sonar.projectKey", "SoftwareEngineering-E-Complish_property_images"
+        // SonarQube organization (for SonarCloud)
+        property "sonar.organization", "softwareengineering-e-complish"
+        // Other SonarQube properties as needed
+        // For example, to specify source and test directories:
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+
+    }
+}
+
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    reports{
+        xml.required = true
+    }
 }
 
 repositories {
@@ -23,6 +61,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     //testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:3.5.13'
 }
 
 tasks.named('test') {

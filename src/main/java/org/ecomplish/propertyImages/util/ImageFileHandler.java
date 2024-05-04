@@ -12,8 +12,6 @@ public class ImageFileHandler {
     public void setFile(MultipartFile file){
         this.tmpFile = file;
         UUID uuid = UUID.randomUUID();
-        //TODO Check if file is an image
-        file.getContentType();
         String fileType = file.getContentType().split("/")[1];
         this.filename = uuid.toString() + "." + fileType;
     }

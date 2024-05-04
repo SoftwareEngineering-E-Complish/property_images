@@ -11,7 +11,6 @@ import software.amazon.awssdk.services.s3.model.ListBucketsResponse;
 import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
 import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 import software.amazon.awssdk.core.sync.RequestBody;
 
 import java.io.IOException;
@@ -44,6 +43,10 @@ public class S3Handler {
                 .region(Region.of(this.region))
                 .endpointOverride(url)
                 .build();
+    }
+
+    public void setS3client(S3Client s3Client) {
+        this.s3Client = s3Client;
     }
 
     public String getBuckets() {
