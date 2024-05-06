@@ -25,3 +25,9 @@ In application.properties file are set the following properties regarding the AW
 * aws.s3.region
 Additionally, the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set as environment variables,
 so the service can connect to the pre-configured s3 bucket.
+
+## Testing
+You can manually execute the unit tests by executing `gradle test`.
+Tests are also automatically invoked for code commited or merged in the main branch.
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SoftwareEngineering-E-Complish_property_images&metric=coverage)](https://sonarcloud.io/summary/new_code?id=SoftwareEngineering-E-Complish_property_images)
