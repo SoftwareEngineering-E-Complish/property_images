@@ -7,6 +7,8 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -60,6 +62,19 @@ public class S3HandlerTests {
         //Mockito.verify(s3Client).putObject(Mockito.any(PutObjectRequest.class), Mockito.any(RequestBody.class));
         String resultUrl = "https://test-image-storage.test-url/13/123e4567-e89b-12d3-a456-426614174000.jpeg";
         assertEquals(resultUrl, result);
+    }
+
+    @Test
+    public void testUploadImageException() throws IOException {
+        // Arrange
+        S3Handler s3Handler = new S3Handler();
+        s3Handler.setS3client(s3Client);
+        Mockito.when(imageFileHandler.getBytes()).thenThrow(new IOException());
+
+        // Act - Assert
+        assertThrows(RuntimeException.class, () -> {
+            String result = s3Handler.uploadImage(imageFileHandler, "13");
+        });
     }
 
     @Test
