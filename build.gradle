@@ -24,7 +24,7 @@ test {
     }*/
 }
 
-sonar {
+sonarqube {
     properties {
         // SonarQube server URL
         property "sonar.host.url", "https://sonarcloud.io"
